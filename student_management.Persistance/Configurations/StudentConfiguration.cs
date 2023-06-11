@@ -19,8 +19,9 @@ namespace student_management.Persistance.Configurations
             builder.Property(s => s.BirthDate).IsRequired();
             builder.Property(s => s.Email).IsRequired();
             builder.Property(s => s.Phone).IsRequired();
-            builder.HasOne(s => s.Gender).WithOne().HasForeignKey<Gender>(g => g.StudentId);
-            builder.HasOne(s => s.Adress).WithOne().HasForeignKey<Adress>(a => a.StudentId);
+
+            builder.HasOne(s => s.Gender).WithMany().HasForeignKey(s => s.GenderId);
+            builder.HasOne(s => s.Adress).WithMany().HasForeignKey(a => a.AdressId);
 
         }
 

@@ -11,7 +11,6 @@ namespace student_management.Persistance.Context
 {
     public class ApplicationDbContext : DbContext
     {
-        public const string ConnectionString = "StudentManagement";
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Student> Student { get; set; }

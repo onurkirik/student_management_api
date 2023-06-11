@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using student_management.Persistance;
+using student_management.Persistance.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddPersistance(builder.Configuration.GetConnectionString("StudentManagement")!);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

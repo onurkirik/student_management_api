@@ -12,6 +12,5 @@ namespace student_management.Domain.Entities
         public string PhysicalAdress { get; set; }
         public string PostalAdress { get; set; }
 
-        public Guid StudentId { get; set; }
     }
 }

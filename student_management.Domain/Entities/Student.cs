@@ -18,6 +18,7 @@ namespace student_management.Domain.Entities
 
         public Guid GenderId { get; set; }
         public Gender Gender { get; set; }
+        public Guid AdressId { get; set; }
         public Adress Adress { get; set; }
     }
 }
