@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace student_management.Persistance.Repositories.StudentRepository
+namespace student_management.Application.Services
 {
-    public class StudentWriteRepository
+    public interface IUnitOfWork
     {
+        Task SaveChangesAsync();
     }
 }
