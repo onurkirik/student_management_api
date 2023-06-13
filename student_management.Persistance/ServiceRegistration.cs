@@ -18,6 +18,8 @@ namespace student_management.Persistance
             services.AddDbContext<ApplicationDbContext>(o => o.UseSqlServer(connectionString));
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAdressService, AdressService>();
+            
         }
     }
 }

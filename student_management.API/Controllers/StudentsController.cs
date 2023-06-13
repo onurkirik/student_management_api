@@ -26,8 +26,8 @@ namespace student_management.API.Controllers
         }
 
         [HttpGet]
-        [Route("get-student")]
-        public async Task<IActionResult> Get(Guid id)
+        [Route("{id:guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             return Ok(await _studentService.GetByIdAsync(id));
         }

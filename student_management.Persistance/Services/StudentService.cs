@@ -47,7 +47,7 @@ namespace student_management.Persistance.Services
 
         public async Task<Student> GetByIdAsync(Guid id)
         {
-            return await _context.Student.Include(s => s.Adress).Include(s => s.Gender).FirstAsync(s => s.Id == id);
+            return await _context.Student.Include(s => s.Adress).Include(s => s.Gender).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task Update(Student model)
