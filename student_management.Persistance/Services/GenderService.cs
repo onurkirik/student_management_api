@@ -10,46 +10,44 @@ using System.Threading.Tasks;
 
 namespace student_management.Persistance.Services
 {
-    public class AdressService : IAdressService
+    public class GenderService : IGenderService
     {
         private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
-
-        public AdressService(ApplicationDbContext context, IUnitOfWork unitOfWork)
+        public GenderService(ApplicationDbContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
         }
-
-        public async Task AddAsync(Adress model)
+        public async Task AddAsync(Gender model)
         {
-            await _context.Adress.AddAsync(model);
+            await _context.Gender.AddAsync(model);
             await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task Delete(Guid id)
         {
-            var deletedModel = await _context.Adress.FindAsync(id);
+            var deletedModel = await _context.Gender.FindAsync(id);
             if (deletedModel != null)
             {
-                _context.Adress.Remove(deletedModel);
+                _context.Gender.Remove(deletedModel);
                 await _unitOfWork.SaveChangesAsync();
             }
         }
 
-        public async Task<List<Adress>> GetAll()
+        public async Task<List<Gender>> GetAll()
         {
-            return await _context.Adress.ToListAsync();
+            return await _context.Gender.ToListAsync();
         }
 
-        public async Task<Adress> GetByIdAsync(Guid id)
+        public async Task<Gender> GetByIdAsync(Guid id)
         {
-            return await _context.Adress.FirstAsync(s => s.Id == id);
+            return await _context.Gender.FirstAsync(s => s.Id == id);
         }
 
-        public async Task Update(Adress model)
+        public async Task Update(Gender model)
         {
-            _context.Adress.Update(model);
+            _context.Gender.Update(model);
             await _unitOfWork.SaveChangesAsync();
         }
     }

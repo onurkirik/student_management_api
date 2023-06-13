@@ -19,7 +19,8 @@ namespace student_management.Persistance
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAdressService, AdressService>();
-            
+            services.AddScoped<IGenderService, GenderService>();
+
         }
     }
 }
