@@ -14,7 +14,7 @@ namespace student_management.Application.Services
         Task<List<Student>> GetAll();
         Task<Student> GetByIdAsync(Guid id);
         Task AddAsync(Student model);
-        Task Update(Student model);
+        Task Update(Guid id, Student model);
         Task Delete(Guid id);
     }
 }

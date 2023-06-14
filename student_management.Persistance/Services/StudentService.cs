@@ -50,10 +50,22 @@ namespace student_management.Persistance.Services
             return await _context.Student.Include(s => s.Adress).Include(s => s.Gender).FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task Update(Student model)
+        public async Task Update(Guid id, Student model)
         {
-            _context.Student.Update(model);
-            await _unitOfWork.SaveChangesAsync();
+            if (await _context.Student.AnyAsync(s => s.Id == id))
+            {
+                var updateStudent = await GetByIdAsync(id);
+                updateStudent!.FirstName = model.FirstName;
+                updateStudent.LastName = model.LastName;
+                updateStudent.Phone = model.Phone;
+                updateStudent.Email = model.Email;
+                updateStudent.BirthDate = model.BirthDate;
+                updateStudent.GenderId = model.GenderId;
+                updateStudent.Adress.PhysicalAdress = model.Adress.PhysicalAdress;
+                updateStudent.Adress.PostalAdress = model.Adress.PostalAdress;
+
+                await _unitOfWork.SaveChangesAsync();
+            }
         }
         public async Task Delete(Guid id)
         {

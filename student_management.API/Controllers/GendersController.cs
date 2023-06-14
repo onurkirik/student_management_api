@@ -1,42 +1,41 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using student_management.Application.Services;
 using student_management.Domain.Entities;
-using student_management.Persistance.Context;
+using student_management.Persistance.Services;
 
 namespace student_management.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentsController : ControllerBase
+    public class GendersController : ControllerBase
     {
-        private readonly IStudentService _studentService;
+        private readonly IGenderService _genderService;
 
-        public StudentsController(IStudentService studentService)
+        public GendersController(IGenderService genderService)
         {
-            _studentService = studentService;
+            _genderService = genderService;
         }
 
         [HttpGet]
         [Route("get-all")]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _studentService.GetAll());
+            return Ok(await _genderService.GetAll());
         }
 
         [HttpGet]
         [Route("{id:guid}")]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
-            return Ok(await _studentService.GetByIdAsync(id));
+            return Ok(await _genderService.GetByIdAsync(id));
         }
 
         [HttpPost]
         [Route("create-student")]
-        public async Task<IActionResult> Create(Student model)
+        public async Task<IActionResult> Create(Gender model)
         {
-            await _studentService.AddAsync(model);
+            await _genderService.AddAsync(model);
             return Ok();
         }
 
@@ -44,16 +43,17 @@ namespace student_management.API.Controllers
         [Route("delete-student")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _studentService.Delete(id);
+            await _genderService.Delete(id);
             return Ok();
         }
 
         [HttpPut]
-        [Route("update-student/{id:guid}")]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] Student model)
+        [Route("update-student")]
+        public async Task<IActionResult> Update(Gender model)
         {
-            await _studentService.Update(id, model);
+            await _genderService.Update(model);
             return Ok();
         }
+
     }
 }
