@@ -32,19 +32,11 @@ namespace student_management.API.Controllers
             return Ok(await _studentService.GetByIdAsync(id));
         }
 
-        [HttpPost]
+        [AcceptVerbs("POST")]
         [Route("create-student")]
         public async Task<IActionResult> Create(Student model)
         {
             await _studentService.AddAsync(model);
-            return Ok();
-        }
-
-        [HttpDelete]
-        [Route("delete-student")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            await _studentService.Delete(id);
             return Ok();
         }
 
@@ -53,6 +45,14 @@ namespace student_management.API.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] Student model)
         {
             await _studentService.Update(id, model);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("delete-student/{id:guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            await _studentService.Delete(id);
             return Ok();
         }
     }

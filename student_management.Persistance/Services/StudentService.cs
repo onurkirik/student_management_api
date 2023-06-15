@@ -29,12 +29,14 @@ namespace student_management.Persistance.Services
         {
             var adress = new Adress()
             {
-                Id = model.Adress.Id,
+                Id = Guid.NewGuid(),
                 PhysicalAdress = model.Adress.PhysicalAdress,
                 PostalAdress = model.Adress.PostalAdress
             };
 
             await _adressService.AddAsync(adress);
+
+            model.Adress = adress;
 
             await _context.Student.AddAsync(model);
             await _unitOfWork.SaveChangesAsync();
@@ -69,7 +71,7 @@ namespace student_management.Persistance.Services
         }
         public async Task Delete(Guid id)
         {
-            var deletedModel = _context.Student.Find(id);
+            var deletedModel = await GetByIdAsync(id);
             if (deletedModel != null)
             {
                 _context.Student.Remove(deletedModel);
